@@ -1,0 +1,8 @@
+INP    50 'D3L1.inp'
+ICS    55 'D3L1.ics'
+LST    60 'D3L1.lst'
+RST    66 'D3L1.rst'
+NOD    30 'D3L1.nod'
+ELE    40 'D3L1.ele'
+OBS    70 'D3L1.obs'
+SMY    80 'D3L1.smy'
