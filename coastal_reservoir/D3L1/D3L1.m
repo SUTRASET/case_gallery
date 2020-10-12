@@ -54,30 +54,30 @@ mov =  VideoWriter('concerntration.avi');% avifile('pvc1.avi','quality',qt,'comp
 mov.FrameRate = 30;mov.Quality=100;%FrameRate is the fps, Quality range from 1 to 100
 open(mov);
 for i = Time_range
-c_matrixi  = reshape(nod(i).terms{c_idx},[inp.nn1,inp.nn2]);
-%Find the index of reservoir node and element 
-High_K = 3.5e-07;
-High_K_Selected = High_K/10;
-High_K_Reservoir = 3.51e-07;
-Above_resservoirwater_indx = find(A_HydrulicConducitivy_dat>=High_K...
-    &A_HydrulicConducitivy_dat<High_K_Reservoir);
-%Modify the data in reservoir (Concentration and velocity)
-C_interp = interp2(c_matrixi,2,'liner');
-c_matrix_interp = C_interp(4:4:561,4:4:1921)%interp 3 times
-c_elecentral = reshape(c_matrix_interp,[inp.ne,1]);
-c_elecentral (Above_resservoirwater_indx) = nan;
-c_matrix  = reshape(c_elecentral,[inp.nn1-1,inp.nn2-1]);
-contourf(xele_matrix,yele_matrix,c_matrix,100,'LineStyle','none')
-hold on
-%line for D3_L1
-line([3 3.12],[0.35 0.35],'Color','w','LineStyle','-','LineWidth',5);
-line([3.12 3.12],[0.35 0.21],'Color','w','LineStyle','-','LineWidth',5);
-line([3.12 3.17],[0.21 0.21],'Color','w','LineStyle','-','LineWidth',5);
-line([3.17 3.17],[0.21 0.35],'Color','w','LineStyle','-','LineWidth',5);
-line([3.17 3.4],[0.35 0.35],'Color','w','LineStyle','-','LineWidth',5);
-line([2.1 3.0],[0.68 0.35],'Color','w','LineStyle','-','LineWidth',5);
-    F = getframe(gcf); % save the current figure
-    writeVideo(mov,F);% add it as the next frame of the movie
+    c_matrixi  = reshape(nod(i).terms{c_idx},[inp.nn1,inp.nn2]);
+    %Find the index of reservoir node and element 
+    High_K = 3.5e-07;
+    High_K_Selected = High_K/10;
+    High_K_Reservoir = 3.51e-07;
+    Above_resservoirwater_indx = find(A_HydrulicConducitivy_dat>=High_K...
+        &A_HydrulicConducitivy_dat<High_K_Reservoir);
+    %Modify the data in reservoir (Concentration and velocity)
+    C_interp = interp2(c_matrixi,2,'liner');
+    c_matrix_interp = C_interp(4:4:561,4:4:1921);;%interp 3 times;
+    c_elecentral = reshape(c_matrix_interp,[inp.ne,1]);
+    c_elecentral (Above_resservoirwater_indx) = nan;
+    c_matrix  = reshape(c_elecentral,[inp.nn1-1,inp.nn2-1]);
+    contourf(xele_matrix,yele_matrix,c_matrix,100,'LineStyle','none');
+    hold on;
+    %line for D3_L1
+    line([3 3.12],[0.35 0.35],'Color','w','LineStyle','-','LineWidth',5);
+    line([3.12 3.12],[0.35 0.21],'Color','w','LineStyle','-','LineWidth',5);
+    line([3.12 3.17],[0.21 0.21],'Color','w','LineStyle','-','LineWidth',5);
+    line([3.17 3.17],[0.21 0.35],'Color','w','LineStyle','-','LineWidth',5);
+    line([3.17 3.4],[0.35 0.35],'Color','w','LineStyle','-','LineWidth',5);
+    line([2.1 3.0],[0.68 0.35],'Color','w','LineStyle','-','LineWidth',5);
+        F = getframe(gcf); % save the current figure
+        writeVideo(mov,F);% add it as the next frame of the movie
 end
 close(mov);
 %%
@@ -201,41 +201,41 @@ c_matrix_RMesh = zeros(length(RMesh_ele_x),1)
 c_matrix_RBedR = zeros(length(RBedR_ele_x),1)
 
 for i = Time_range
-vx_matrix = reshape(ele(i).terms{vx_idx},[inp.nn1-1,inp.nn2-1]);
-vy_matrix = reshape(ele(i).terms{vy_idx},[inp.nn1-1,inp.nn2-1]);
-vx_matrix_RSide(:,i) = vx_matrix(RSide_ele_y,RSide_ele_x)
-vy_matrix_RSide(:,i) = vy_matrix(RSide_ele_y,RSide_ele_x)
-vx_matrix_RBedL(:,i) = vx_matrix(RBedL_ele_y,RBedL_ele_x)
-vy_matrix_RBedL(:,i) = vy_matrix(RBedL_ele_y,RBedL_ele_x)
-vx_matrix_LMesh(:,i) = vx_matrix(LMesh_ele_y,LMesh_ele_x)
-vy_matrix_LMesh(:,i) = vy_matrix(LMesh_ele_y,LMesh_ele_x)
-vx_matrix_DPL(:,i) = vx_matrix(RDPL_ele_y,RDPL_ele_x)
-vy_matrix_DPL(:,i) = vy_matrix(RDPL_ele_y,RDPL_ele_x)
-vx_matrix_DPB(:,i) = vx_matrix(RDPB_ele_y,RDPB_ele_x)
-vy_matrix_DPB(:,i) = vy_matrix(RDPB_ele_y,RDPB_ele_x)
-vx_matrix_DPR(:,i) = vx_matrix(RDPR_ele_y,RDPR_ele_x)
-vy_matrix_DPR(:,i) = vy_matrix(RDPR_ele_y,RDPR_ele_x)
-vx_matrix_RMesh(:,i) = vx_matrix(RMesh_ele_y,RMesh_ele_x)
-vy_matrix_RMesh(:,i) = vy_matrix(RMesh_ele_y,RMesh_ele_x)
-vx_matrix_RBedR(:,i) = vx_matrix(RBedR_ele_y,RBedR_ele_x)
-vy_matrix_RBedR(:,i) = vy_matrix(RBedR_ele_y,RBedR_ele_x)
+    vx_matrix = reshape(ele(i).terms{vx_idx},[inp.nn1-1,inp.nn2-1]);
+    vy_matrix = reshape(ele(i).terms{vy_idx},[inp.nn1-1,inp.nn2-1]);
+    vx_matrix_RSide(:,i) = vx_matrix(RSide_ele_y,RSide_ele_x);
+    vy_matrix_RSide(:,i) = vy_matrix(RSide_ele_y,RSide_ele_x);
+    vx_matrix_RBedL(:,i) = vx_matrix(RBedL_ele_y,RBedL_ele_x);
+    vy_matrix_RBedL(:,i) = vy_matrix(RBedL_ele_y,RBedL_ele_x);
+    vx_matrix_LMesh(:,i) = vx_matrix(LMesh_ele_y,LMesh_ele_x);
+    vy_matrix_LMesh(:,i) = vy_matrix(LMesh_ele_y,LMesh_ele_x);
+    vx_matrix_DPL(:,i) = vx_matrix(RDPL_ele_y,RDPL_ele_x);
+    vy_matrix_DPL(:,i) = vy_matrix(RDPL_ele_y,RDPL_ele_x);
+    vx_matrix_DPB(:,i) = vx_matrix(RDPB_ele_y,RDPB_ele_x);
+    vy_matrix_DPB(:,i) = vy_matrix(RDPB_ele_y,RDPB_ele_x);
+    vx_matrix_DPR(:,i) = vx_matrix(RDPR_ele_y,RDPR_ele_x);
+    vy_matrix_DPR(:,i) = vy_matrix(RDPR_ele_y,RDPR_ele_x);
+    vx_matrix_RMesh(:,i) = vx_matrix(RMesh_ele_y,RMesh_ele_x);
+    vy_matrix_RMesh(:,i) = vy_matrix(RMesh_ele_y,RMesh_ele_x);
+    vx_matrix_RBedR(:,i) = vx_matrix(RBedR_ele_y,RBedR_ele_x);
+    vy_matrix_RBedR(:,i) = vy_matrix(RBedR_ele_y,RBedR_ele_x);
 end
-xele_matrix = reshape(ele(1).terms{xele_idx},[inp.nn1-1,inp.nn2-1])
-xele_matrix_RSide = xele_matrix(RSide_ele_y,RSide_ele_x)
-xele_matrix_RBed_1 = xele_matrix(RBed_ele_y,RBed_ele_x)
-xele_matrix_RBed = transpose(xele_matrix_RBed_1)
-xele_matrix_upperboudary_1 = 1.4:0.7/33:2.1
-xele_matrix_upperboudary = transpose(xele_matrix_upperboudary_1)
-x = cat (1,xele_matrix_upperboudary,xele_matrix_RSide,xele_matrix_RBed)
+xele_matrix = reshape(ele(1).terms{xele_idx},[inp.nn1-1,inp.nn2-1]);
+xele_matrix_RSide = xele_matrix(RSide_ele_y,RSide_ele_x);
+xele_matrix_RBed_1 = xele_matrix(RBed_ele_y,RBed_ele_x);
+xele_matrix_RBed = transpose(xele_matrix_RBed_1);
+xele_matrix_upperboudary_1 = 1.4:0.7/33:2.1;
+xele_matrix_upperboudary = transpose(xele_matrix_upperboudary_1);
+x = cat (1,xele_matrix_upperboudary,xele_matrix_RSide,xele_matrix_RBed);
 %Calculation of each part of Water flux
-Water_flux_RSide = (vx_matrix_RSide*SinAng+vy_matrix_RSide*CosAng)*Volume_RSide_mesh
-Water_flux_RBedL = vy_matrix_RBedL*Volume_RBed_mesh
-Water_flux_LMesh = vy_matrix_LMesh*Volume_RBed_mesh + vx_matrix_LMesh*Volume_RBed_mesh
-Water_flux_DPL = vx_matrix_DPL*Volume_RBed_mesh
-Water_flux_DPB = vy_matrix_DPB*Volume_RBed_mesh
-Water_flux_DPR = vx_matrix_DPR*(-1)*Volume_RBed_mesh
-Water_flux_RMesh = vy_matrix_RMesh*Volume_RBed_mesh + vx_matrix_RMesh*(-1)*Volume_RBed_mesh
-Water_flux_RBedR = vy_matrix_RBedR*Volume_RBed_mesh
+Water_flux_RSide = (vx_matrix_RSide*SinAng+vy_matrix_RSide*CosAng)*Volume_RSide_mesh;
+Water_flux_RBedL = vy_matrix_RBedL*Volume_RBed_mesh;
+Water_flux_LMesh = vy_matrix_LMesh*Volume_RBed_mesh + vx_matrix_LMesh*Volume_RBed_mesh;
+Water_flux_DPL = vx_matrix_DPL*Volume_RBed_mesh;
+Water_flux_DPB = vy_matrix_DPB*Volume_RBed_mesh;
+Water_flux_DPR = vx_matrix_DPR*(-1)*Volume_RBed_mesh;
+Water_flux_RMesh = vy_matrix_RMesh*Volume_RBed_mesh + vx_matrix_RMesh*(-1)*Volume_RBed_mesh;
+Water_flux_RBedR = vy_matrix_RBedR*Volume_RBed_mesh;
 %Combined and output Water flux
 Water_flux = cat (1,Water_flux_RSide,Water_flux_RBedL,Water_flux_LMesh + sum(Water_flux_DPL)...
     ,Water_flux_DPB,sum(Water_flux_DPR) + Water_flux_RMesh,Water_flux_RBedR)
@@ -244,17 +244,17 @@ save('D3L1_Waterflux_sum_interface','D3L1_Waterflux_sum_interface')
 % Interploation salinity(element central) :Water_flux
 
 for i = Time_range
-c_matrixi = reshape(nod(i).terms{c_idx},[inp.nn1,inp.nn2]); % Initial concentration
-C_interp = interp2(c_matrixi,2,'liner');%interp 3 times
-c_matrix_interp = C_interp(4:4:561,4:4:1921);%interp 3 times
-c_matrix_RSide(:,i) = c_matrix_interp(RSide_ele_y,RSide_ele_x)
-c_matrix_RBedL(:,i) = c_matrix_interp(RBedL_ele_y,RBedL_ele_x)
-c_matrix_LMesh(:,i) = c_matrix_interp(LMesh_ele_y,LMesh_ele_x)
-c_matrix_DPL(:,i) = c_matrix_interp(RDPL_ele_y,RDPL_ele_x)
-c_matrix_DPB(:,i) = c_matrix_interp(RDPB_ele_y,RDPB_ele_x)
-c_matrix_DPR(:,i) = c_matrix_interp(RDPR_ele_y,RDPR_ele_x)
-c_matrix_RMesh(:,i) = c_matrix_interp(RMesh_ele_y,RMesh_ele_x)
-c_matrix_RBedR(:,i) = c_matrix_interp(RBedR_ele_y,RBedR_ele_x)
+    c_matrixi = reshape(nod(i).terms{c_idx},[inp.nn1,inp.nn2]); % Initial concentration
+    C_interp = interp2(c_matrixi,2,'liner');%interp 3 times
+    c_matrix_interp = C_interp(4:4:561,4:4:1921);%interp 3 times
+    c_matrix_RSide(:,i) = c_matrix_interp(RSide_ele_y,RSide_ele_x);
+    c_matrix_RBedL(:,i) = c_matrix_interp(RBedL_ele_y,RBedL_ele_x);
+    c_matrix_LMesh(:,i) = c_matrix_interp(LMesh_ele_y,LMesh_ele_x);
+    c_matrix_DPL(:,i) = c_matrix_interp(RDPL_ele_y,RDPL_ele_x);
+    c_matrix_DPB(:,i) = c_matrix_interp(RDPB_ele_y,RDPB_ele_x);
+    c_matrix_DPR(:,i) = c_matrix_interp(RDPR_ele_y,RDPR_ele_x);
+    c_matrix_RMesh(:,i) = c_matrix_interp(RMesh_ele_y,RMesh_ele_x);
+    c_matrix_RBedR(:,i) = c_matrix_interp(RBedR_ele_y,RBedR_ele_x);
 end
 %reservoir side
 Rho_matrix_RSide = inp.rhow0 + inp.drwdu.*c_matrix_RSide
